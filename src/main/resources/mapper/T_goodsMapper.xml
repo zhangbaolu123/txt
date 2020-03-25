@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.zhangbaolu.mapper.T_goodsMapper">
+    	
+    	<select id="queryAll" resultType="com.zhangbaolu.beans.T_goods" parameterType="map">
+    		SELECT g.*,t.cname FROM t_goods g,t_type t WHERE g.type_id=t.type_id
+    	</select>
+    	
+    	<select id="queryType" resultType="com.zhangbaolu.beans.T_type">
+    		select * from t_type
+    	</select>
+    	
+    	<insert id="addGoods" parameterType="com.zhangbaolu.beans.T_goods">
+    		INSERT INTO t_goods(name,type_id,price,status,datea) values(#{name},#{type_id},#{price},#{status},#{datea})
+    	</insert>
+    	
+    	<select id="queryGoodsByid">
+    		select * from t_goods where id=#{0}
+    	</select>
+    	
+    	<update id="updateGoods" parameterType="com.zhangbaolu.beans.T_goods">
+    		UPDATE t_goods SET name=#{name},type_id=#{type_id},price=#{price},status=#{status},datea=#{datea} WHERE id=#{id}
+    	</update>
+    	
+    	<delete id="deleteGoods" parameterType="string">
+    		delete from t_goods where id in(${_parameter})
+    	</delete>
+    	
+    </mapper>
